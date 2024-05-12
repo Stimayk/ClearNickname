@@ -1,4 +1,4 @@
-﻿using CounterStrikeSharp.API;
+using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
 using CounterStrikeSharp.API.Modules.Admin;
@@ -11,7 +11,7 @@ namespace ClearNickname
     public class ClearNickname : BasePlugin
     {
         public override string ModuleName => "ClearNickname";
-        public override string ModuleVersion => "v1.0";
+        public override string ModuleVersion => "v1.0.2";
         public override string ModuleAuthor => "E!N";
 
         private readonly List<string> badWords = [];
@@ -24,8 +24,7 @@ namespace ClearNickname
             string configPath = Path.Combine(configDirectory, "ClearNicknameConfig.ini");
             LoadBadWords(configPath);
             prefix = Localizer["ChatPrefix"];
-
-            CheckAllPlayersNicknames();
+            AddTimer(10.0f, () => CheckAllPlayersNicknames());
         }
 
         private void LoadBadWords(string filePath)
