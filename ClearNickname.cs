@@ -11,7 +11,7 @@ namespace ClearNickname
     public class ClearNickname : BasePlugin
     {
         public override string ModuleName => "ClearNickname";
-        public override string ModuleVersion => "v1.0.2";
+        public override string ModuleVersion => "v1.0.3";
         public override string ModuleAuthor => "E!N";
 
         private readonly List<string> badWords = [];
@@ -39,11 +39,11 @@ namespace ClearNickname
                         badWords.Add(trimmedLine);
                     }
                 }
-                Console.WriteLine($"{ModuleName} | Configuration file loaded. Badword's count: {badWords.Count}");
+                Logger.LogInformation($"{ModuleName} | Configuration file loaded. Badword's count: {badWords.Count}");
             }
             else
             {
-                Console.WriteLine($"{ModuleName} | No configuration file found at {filePath}");
+                Logger.LogError($"{ModuleName} | No configuration file found at {filePath}");
             }
         }
 
@@ -70,11 +70,11 @@ namespace ClearNickname
                         badWords.Add(trimmedLine);
                     }
                 }
-                Console.WriteLine($"{ModuleName} | Configuration file reloaded. Badword's count: {badWords.Count}");
+                Logger.LogInformation($"{ModuleName} | Configuration file reloaded. Badword's count: {badWords.Count}");
             }
             else
             {
-                Console.WriteLine($"{ModuleName} | No configuration file found at {filePath}");
+                Logger.LogError($"{ModuleName} | No configuration file found at {filePath}");
             }
         }
 
@@ -88,7 +88,7 @@ namespace ClearNickname
             if (!Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
-                Console.WriteLine($"{ModuleName} | Created configuration directory at: {directoryPath}");
+                Logger.LogInformation($"{ModuleName} | Created configuration directory at: {directoryPath}");
             }
         }
 
@@ -120,7 +120,7 @@ namespace ClearNickname
 
             if (originalName != cleanedName)
             {
-                Logger.LogInformation($"{ModuleName} | Changed nickname from '{originalName}' to '{cleanedName}' for player with SteamID {@event.Userid.SteamID}");
+                Logger.LogWarning($"{ModuleName} | Changed nickname from '{originalName}' to '{cleanedName}' for player with SteamID {@event.Userid.SteamID}");
                 @event.Userid.PlayerName = cleanedName;
                 @event.Userid.PrintToChat(Localizer["OnConnect", prefix, count]);
                 return HookResult.Continue;
