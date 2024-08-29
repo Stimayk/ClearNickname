@@ -11,7 +11,7 @@ namespace ClearNickname
     public class ClearNickname : BasePlugin
     {
         public override string ModuleName => "ClearNickname";
-        public override string ModuleVersion => "v1.0.3";
+        public override string ModuleVersion => "v1.1";
         public override string ModuleAuthor => "E!N";
 
         private readonly List<string> badWords = [];
@@ -26,7 +26,6 @@ namespace ClearNickname
             prefix = Localizer["ChatPrefix"];
             AddTimer(10.0f, () => CheckAllPlayersNicknames());
         }
-
         private void LoadBadWords(string filePath)
         {
             if (File.Exists(filePath))
@@ -160,5 +159,21 @@ namespace ClearNickname
             }
             return (nickname.Trim(), count);
         }
+
+        //public IMenu CreateMenu(string title)
+        //{
+        //    CenterHtmlMenu menu = new CenterHtmlMenu(title, this);
+        //    return menu;
+        //}
+        //public void OpenMenu(CCSPlayerController? player)
+        //{
+        //    if (player == null) return;
+        //
+        //    var menu = CreateMenu($"Проверка рекламы в никнейме");
+        //    menu.AddMenuOption("Добавить сайт", (player, _) => OpenBuyMenu(player));
+        //    menu.AddMenuOption("Обновить список игроков", (player, _) => OpenInventoryMenu(player));
+        //    menu.AddMenuOption("Перезагрузить конфиг", (player, _) => OpenFunctionMenu(player));
+        //    menu.Open(player);
+        //}
     }
 }
